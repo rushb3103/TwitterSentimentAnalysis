@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <form action="" method="POST">
+        <div class="mb-3 mt-2 mx-auto d-flex" >
+            <div class="p-2 mx-3 col-4 ">
+                <img src="/static/unnamed.png" alt="logo" width="44" height="44">
+            </div>
+            <div class="p-1 col-3">
+                <input type="text" class="form-control border border-dark" placeholder="Search" 
+                aria-label="Recipient's username" aria-describedby="basic-addon2" name="input">
+            </div>
+            <div class="p-1 input-group-append">
+                <button class="btn btn-outline-primary mx-1" type="submit" name="searchbtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="col-4 p-1 text-end">
+
+                  
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle border-primary rounded-cicle " data-bs-toggle="dropdown" aria-expanded="false">
+                        {{user.uname}}
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="../logout">Logout</a></li>
+                        
+                      </ul>
+                    </div>
+               
+            </div>
+        </div>
+    </form>
+    <div class="card col-5 mt-5 mx-auto">
+        <div class="card-body">
+            <form action="" method="post">
+                <textarea name="text" id="" class="col-12 p-1 ps-3" cols="" rows="6" placeholder="Say something"></textarea>
+                <div class="form-group mt-2">
+                    <button class="btn btn-primary float-end" type="submit" name="postbtn">POST</button>
+                </div>
+            
+            </form>
+        </div>
+
+    </div>
+    {% for post in posts %}
+    <!-- <div>sentiment :{{post.sentiment}}</div> -->
+    {% if post.sentiment == "positive" %}
+    <div class="card col-8 mt-5 mx-auto border-success border-3">
+        <div class="card-body ">
+            <h5 class="card-title">@{{post.user.uname}}</h5>
+            <p class="card-text">{{post.msg}}</p>
+            <div class="col-10 d-flex text-secondary">
+                <div class="col-2">Positive</div>
+                <div class="col-2">{{'%0.2f' | format(post.positive|float)}}</div>
+                <div class="col-2">Negative</div>
+                <div class="col-2">{{'%0.2f' | format(post.negative|float)}}</div>
+                <div class="col-2">Neutral</div>
+                <div class="col-2">{{'%0.2f' | format(post.neutral|float)}}</div>
+            </div>
+        </div>
+    </div>
+    {% elif post.sentiment == "negative" %}
+    <div class="card col-8 mt-5 mx-auto border-danger border-3">
+        <div class="card-body ">
+            <h5 class="card-title">@{{post.user.uname}}</h5>
+            <p class="card-text">{{post.msg}}</p>
+            <div class="col-10 d-flex text-secondary">
+                <div class="col-2">Positive</div>
+                <div class="col-2">{{'%0.2f' | format(post.positive|float)}}</div>
+                <div class="col-2">Negative</div>
+                <div class="col-2">{{'%0.2f' | format(post.negative|float)}}</div>
+                <div class="col-2">Neutral</div>
+                <div class="col-2">{{'%0.2f' | format(post.neutral|float)}}</div>
+            </div>
+        </div>
+    </div>
+    {% elif post.sentiment == "neutral" %}
+    <div class="card col-8 mt-5 mx-auto border-secondary border-3">
+        <div class="card-body border-secondary">
+            <h5 class="card-title">@{{post.user.uname}}</h5>
+            <p class="card-text">{{post.msg}}</p>
+            <div class="col-10 d-flex text-secondary">
+                <div class="col-2">Positive</div>
+                <div class="col-2">{{'%0.2f' | format(post.positive|float)}}</div>
+                <div class="col-2">Negative</div>
+                <div class="col-2">{{'%0.2f' | format(post.negative|float)}}</div>
+                <div class="col-2">Neutral</div>
+                <div class="col-2">{{'%0.2f' | format(post.neutral|float)}}</div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card col-8 mt-5 mx-auto border-danger border-3">
+        <div class="card-body">
+            <h5 class="card-title">@{{post.user.uname}}</h5>
+            <p class="card-text">{{post.msg}}</p>
+            <div class="col-10 d-flex text-secondary">
+                <div class="col-2">Positive</div>
+                <div class="col-2">{{'%0.2f' | format(post.positive|float)}}</div>
+                <div class="col-2">Negative</div>
+                <div class="col-2">{{'%0.2f' | format(post.negative|float)}}</div>
+                <div class="col-2">Neutral</div>
+                <div class="col-2">{{'%0.2f' | format(post.neutral|float)}}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
